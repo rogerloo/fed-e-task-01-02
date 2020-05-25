@@ -36,5 +36,37 @@ function parseJSON(str) {
     }
 }
 
-let r = parseJSON('{ "name": "zs" }').map(x=>x.name.toUpperCase())
-console.log(r)
+let r = parseJSON('{ "name":w "zs" }').map(x=>x.name.toUpperCase())
+// console.log(r)
+
+
+class a{
+    static of(value){
+        return new a(value)
+    }
+    constructor(value){
+        this._value = value
+    }
+    map(fn){
+        return this
+    }
+}
+class b{
+    static of(value){
+        return new a(value)
+    }
+    constructor(value){
+        this._value = value
+    }
+    map(fn){
+        return b.of(fn(this._value))
+    }
+}
+let c = function (value){
+    try {
+        return b.of(JSON.parse(value))
+    } catch (error) {
+        return a.of({errorName:error.name,errorMessage: error.message})
+    }
+}
+console.log(c('{ "name":w "zs" }').map(x=>x.name.toUpperCase()))

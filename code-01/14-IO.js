@@ -1,22 +1,58 @@
 const fp = require('lodash/fp')
 
-class IO {
-    static of (value) {
-        return new IO(function () {
+// class IO {
+//     static of (value) {
+//         return new IO(function () {
+//             return value
+//         })
+//     }
+
+//     constructor (fn){
+//         this._value = fn
+//     }
+
+//     map (fn){
+//         return new IO(fp.flowRight(fn, this._value))
+//     }
+
+// }
+
+// let r = IO.of(process).map(p => p.execPath)
+// // console.log(r)
+// console.log(r._value())
+
+class IO{
+    static of(value){
+        return new IO(function(){
             return value
         })
     }
-
     constructor (fn){
         this._value = fn
     }
-
-    map (fn){
+    map(fn){
         return new IO(fp.flowRight(fn, this._value))
     }
-
 }
 
-let r = IO.of(process).map(p => p.execPath)
-// console.log(r)
+// let r = IO.of(process).map(p => p.execPath)
+// // console.log(r)
+// console.log(r._value())
+
+class io{
+    static of (value){
+        return new io(function(){
+            return value
+        })
+    }
+    constructor(fn){
+        this._value = fn
+    }
+    map(fn){
+        return new io(fp.flowRight(fn, this._value))
+    }
+}
+
+let r = io.of(process).map(p => p.execPath)
+// // console.log(r)
 console.log(r._value())
