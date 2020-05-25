@@ -49,3 +49,23 @@ let r = readFile('package.json')
 
 
 console.log(r)
+
+class monad{
+    static of (value){
+        return new monad(function(){
+            return value
+        })
+    }
+    constructor(fn){
+        this._value = fn
+    }
+    map(fn){
+        return new monad(fp.flowRight(fn,this._value))
+    }
+    join(){
+        return this._value()
+    }
+    flatMap(fn){
+        return this.map(fn).join()
+    }
+}

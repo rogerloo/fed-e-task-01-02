@@ -60,6 +60,9 @@ function curry(fn) {
             return function () {
                 return curriedFn(...args.concat(Array.from(arguments)))
             }
+            // return function (...args2) {
+            //     return curriedFn(...args.concat(args2))
+            // }
         }
         return fn(...args)
     }

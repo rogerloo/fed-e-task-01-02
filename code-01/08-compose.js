@@ -64,3 +64,13 @@ const f = _.flowRight(join('-'),trace('map后'), map(_.toLower),trace('split后'
 
 
 console.log(f('new i love'))
+
+// function compose(...args) {
+//     return function (value) {
+//         return args.reverse().reduce((prev, next)=>{
+//             return next(prev(value))
+//         }, value)
+//     }    
+// }
+
+// const compose = (...args)=>value=>args.reverse().reduce((prev,next)=>next(prev(value)),value)
