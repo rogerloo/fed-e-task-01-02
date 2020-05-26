@@ -21,7 +21,7 @@ class MayBe {
         this._value = x
     }
     map (fn) {
-        return this.isNothing? this: Container.of(fn(this._value))
+        return this.isNothing()? MayBe.of(null): MayBe.of(fn(this._value))
     }
     isNothing () {
         return this._value === null || this._value === undefined
