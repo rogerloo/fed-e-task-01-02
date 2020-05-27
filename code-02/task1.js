@@ -52,5 +52,6 @@ let averageDollarValue = fp.flowRight(_average, fp.map(car => car.dollar_value))
 // 使用flowRight写一个sanitizeNames()函数，返回一个下划线连接的小写字符串，把数组中的name转换为这种形式：
 // 例如：sanitizeNames(["Hello World"]) => ["hello_world"]
 let _underscore = fp.replace(/\W+/g, '_') // 无需改动 并在sanitizeNames中使用它
-let sanitizeNames = fp.flowRight(_underscore, fp.map(fp.lowerCase), fp.split(' '))
-console.log(sanitizeNames([cars[0].name]))
+// let sanitizeNames = fp.flowRight(_underscore, fp.map(fp.lowerCase), fp.split(' '))
+let sanitizeNames = fp.map(fp.flowRight(_underscore, fp.lowerCase, fp.prop('name')));
+console.log(sanitizeNames(cars))

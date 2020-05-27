@@ -6,6 +6,7 @@ const { MayBe, Container } = require('./support')
 let maybe = MayBe.of([5, 6, 1])
 // let ex1 =  //你需要实现的位置
 let ex1 = functor => functor.map(val=>fp.map(x=>fp.add(x, 2), val))
+// let ex1 = fp.map(fp.add(1))
 
 // console.log(ex1(maybe))
 
@@ -16,7 +17,7 @@ let dealFunctor = (functor, fn) => fn(functor._value)
 let curried = fp.curry(dealFunctor)
 let ex2 = curried(xs)
 ex2(fp.first)
-// console.log(ex2(fp.first))
+console.log(ex2(fp.first))
 
 
 
@@ -33,9 +34,10 @@ let safeProp = fp.curry(function(x, o){
     return MayBe.of(o[x])
 })
 let user = { id:2, name:"Albert" }
-const nameCurried = safeProp('name')
 const getFunctorValue = functor=>functor._value
-let ex3 = fp.flowRight(fp.first, getFunctorValue, nameCurried)
+// let ex3 = fp.flowRight(fp.first, getFunctorValue, safeProp('name'))
+
+var ex3 = fp.flowRight(fp.map(fp.first), safeProp('name'));
 // ex3(user)
 // console.log(ex3(user))
 
@@ -59,9 +61,9 @@ let ex3 = fp.flowRight(fp.first, getFunctorValue, nameCurried)
 //         return parseInt(n)
 //     }
 // }
-let ex4 = n => MayBe.of(n)
-                    .map(parseInt)
-
+// let ex4 = n => MayBe.of(n)
+//                     .map(parseInt)
+let ex4 = fp.flowRight(fp.map(parseInt), Maybe.of)
 
 console.log(ex4(213.42))
 console.log(ex4(null))
