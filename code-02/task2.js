@@ -13,11 +13,12 @@ let ex1 = functor => functor.map(val=>fp.map(x=>fp.add(x, 2), val))
 // 练习2
 // 实现一个函数ex2, 能够使用fp.first获取列表的第一个元素
 let xs = Container.of(['do', 'ray', 'me', 'fa', 'so', 'la', 'ti', 'do'])
-let dealFunctor = (functor, fn) => fn(functor._value)
-let curried = fp.curry(dealFunctor)
-let ex2 = curried(xs)
-ex2(fp.first)
-console.log(ex2(fp.first))
+// let dealFunctor = (functor, fn) => fn(functor._value)
+// let curried = fp.curry(dealFunctor)
+// let ex2 = curried(xs)
+let ex2 = fp.map(fp.first)
+// ex2(fp.first)
+console.log(ex2(xs))
 
 
 
@@ -63,7 +64,7 @@ var ex3 = fp.flowRight(fp.map(fp.first), safeProp('name'));
 // }
 // let ex4 = n => MayBe.of(n)
 //                     .map(parseInt)
-let ex4 = fp.flowRight(fp.map(parseInt), Maybe.of)
+let ex4 = fp.flowRight(fp.map(parseInt), MayBe.of)
 
-console.log(ex4(213.42))
-console.log(ex4(null))
+// console.log(ex4(213.42))
+// console.log(ex4(undefined))
